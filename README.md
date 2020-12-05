@@ -3,7 +3,7 @@
 Solve Sudoku puzzles using Python.
 
 **Authors:**
-- Itskengh
+- Itskegnh
 - DunZek
 
 **Program flow:**
