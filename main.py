@@ -1,60 +1,33 @@
-import os
+import sys  # To detect the operating system
+import os  # For command-line operations
 
-def render(board, mode="empty"):
-    print("-"*23)
-    temp = 0
-    temp2 = 0
-    for y in board:
-        for x in y:
-            if mode.lower() == "empty":
-                if x != 0:
-                    print(x, end=" ")
-                else:
-                    print(" ", end=" ")
-            elif mode.lower() == "fill":
-                print(x, end=" ")
-            else:
-                return None
-            temp2 += 1
-            if temp2 == 0:
-                print("|", end=" ")
-            if temp2 == 3:
-                print("|", end=" ")
-                temp2 = 0
-        print("")
-        temp += 1
-        if temp == 3:
-            print("-"*23)
-            temp = 0
-
+# "Render" the soduku board
 def newRender(board, mode="empty"):
-    string = ""
-    string += "-"*23 + "\n"
-    temp = 0
-    temp2 = 0
-    for y in board:
-        for x in y:
-            if mode.lower() == "empty":
-                if x != 0:
-                    string = string + str(x) + " "
-                else:
-                    string = string + "  "
-            elif mode.lower() == "fill":
-                string = string + str(x) + " "
-            else:
-                return None
-            temp2 += 1
-            if temp2 == 0:
-                string = string + "|" + " "
-            if temp2 == 3:
-                string = string + "|" + " "
-                temp2 = 0
-        string = string + "\n"
-        temp += 1
-        if temp == 3:
-            string = string + "-"*23 + "\n"
-            temp = 0
-    print(string)
+    string = "" # set the string
+    string += "-"*23 + "\n" #add the header to the string
+    temp = 0 # set the temp var for the horizontal splits
+    temp2 = 0 # set the temp var for the vertical splits
+    for y in board: # loop all lines in the variable
+        for x in y: # loop all items in all the lines
+            if mode.lower() == "empty": # check what render mode is activated and render empty slots that way
+                if x != 0: # if slot is not 0 
+                    string += str(x) + " " # render the number
+                else: # otherwise if the slot is 0
+                    string += "  " # render " "
+            elif mode.lower() == "fill": # if the mode is "fill"
+                string = string + str(x) + " " # render the number
+            else: # if neither of the render modes are chosen
+                return None # exit with None
+            temp2 += 1 # add 1 to temp2 (verticle lines)
+            if temp2 == 3: # if 3 numbers has passed
+                string += "|" + " " # render "| " (verticle line)
+                temp2 = 0 # set count to 0
+        string += "\n" # after every line render "\n" (newline)
+        temp += 1 # add 1 to line count
+        if temp == 3: # if line count is 3
+            string += "-"*23 + "\n" # render "-----------------------" (horizontal line)
+            temp = 0 # set count to 0
+    print(string) # render the final product
 
 def check(y,x,num,board):
     for i in range(9):
@@ -84,18 +57,19 @@ def solve(board):
     newRender(board)
 
 def inputSoduku():
-    os.system('cls')
+    # TODO: Vary the board size?
+    board = [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+    ]
 
-    # Board size = 9x9
-    board = [[],
-             [],
-             [],
-             [],
-             [],
-             [],
-             [],
-             [],
-             []]
     for y in range(9):
         for x in range(9):
             newRender(board)
@@ -110,9 +84,19 @@ def inputSoduku():
 
 
 if __name__ == '__main__':
+
+    # 1. Prepare the command-line
+    if sys.platform == 'win32': os.system('cls')
+    elif sys.platform == 'darwin': os.system('clear')
+
+    # 2. Manually instantiate an unsolved sudoku board
     board = inputSoduku()
+
     print("Input:\n")
-    newRender(board, "empty")
-    print(" ")
-    print("Output:\n")
-    solve(board)
+    
+    # newRender(board, "empty")
+    # print(" ")
+    # print("Output:\n")
+
+    # # Solving algorithm
+    # solve(board)

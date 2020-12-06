@@ -1,6 +1,6 @@
 # Sudoku solver
 
-Solve Sudoku puzzles using Python.
+Solve Sudoku puzzles using Python, inside the command line.
 
 **Authors:**
 - Itskengh
