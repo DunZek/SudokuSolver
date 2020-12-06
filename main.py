@@ -94,9 +94,9 @@ if __name__ == '__main__':
 
     print("Input:\n")
     
-    # newRender(board, "empty")
-    # print(" ")
-    # print("Output:\n")
+    newRender(board, "empty")
+    print(" ")
+    print("Output:\n")
 
-    # # Solving algorithm
-    # solve(board)
+    # Solving algorithm
+    solve(board)
